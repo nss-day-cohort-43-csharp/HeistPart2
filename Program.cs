@@ -83,20 +83,60 @@ namespace TeamSixHeist
                     }
                 }
 
-                //declare a type of instance based on the user's choice
-                IRobber newCriminal;
-                switch (selection)
+                //prompt for skill level
+                int skillLevel = 0;
+                while (true) 
                 {
-                    case 1:
-                        newCriminal = new Hacker();
+                    Console.Write("Skill Level (between 1 and 100): ");
+                    try
+                    {
+                        skillLevel = Int32.Parse(Console.ReadLine());
+                        if(skillLevel <= 0 || skillLevel > 100)
+                        {
+                            throw new Exception();
+                        }
                         break;
-                     case 2:
-                        newCriminal = new Muscle();
-                        break;
-                    case 3:
-                        newCriminal = new LockSpecialist();
-                        break;    
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Skill Level must be an integer between 1 and 100");
+                    }
                 }
+
+                //prompt for skill level
+                int cut = 0;
+                while (true) 
+                {
+                    Console.Write("Cut (between 1 and 100): ");
+                    try
+                    {
+                        cut = Int32.Parse(Console.ReadLine());
+                        if(cut <= 0 || cut > 100)
+                        {
+                            throw new Exception();
+                        }
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Cut must be an integer between 1 and 100");
+                    }
+                }
+
+                //declare a type of instance based on the user's choice
+                // IRobber newCriminal;
+                // switch (selection)
+                // {
+                //     case 1:
+                //         newCriminal = new Hacker();
+                //         break;
+                //      case 2:
+                //         newCriminal = new Muscle();
+                //         break;
+                //     case 3:
+                //         newCriminal = new LockSpecialist();
+                //         break;    
+                // }
 
             }
         }
