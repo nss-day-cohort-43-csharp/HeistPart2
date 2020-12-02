@@ -3,12 +3,17 @@ using System.Collections.Generic;
 
 namespace TeamSixHeist
 {
-    class Program
+  class Program
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            //create an initial list of robbers
-            List<IRobber> rolodex = new List<IRobber>()
+
+      // create a new bank 
+      Bank b = new Bank();
+      b.Recon();
+
+      //create an initial list of robbers
+      List<IRobber> rolodex = new List<IRobber>()
             {
                 new Hacker()
                 {
@@ -48,96 +53,98 @@ namespace TeamSixHeist
                 }
             };
 
-            //print initial number of criminals
-            Console.WriteLine($"Number of criminals: {rolodex.Count}");
+      //print initial number of criminals
+      Console.WriteLine($"Number of criminals: {rolodex.Count}");
 
-            //allow user to add as many criminals as they want
-            while(true)
-            {
-                //prompt for a new criminal
-                Console.WriteLine("Is there another criminal you know? If so, what is their name?");
-                string name = Console.ReadLine();
+      //allow user to add as many criminals as they want
+      while (true)
+      {
+        //prompt for a new criminal
+        Console.WriteLine("Is there another criminal you know? If so, what is their name?");
+        string name = Console.ReadLine();
 
-                if(name == "")
-                {
-                    break;
-                }
-
-                int selection = 0;
-                //prompt for a specialty
-                while(true)
-                {
-                    Console.WriteLine("What is their specialty?\n1) Hacker\n2) Muscle\n3) Lock Specialist");
-                    try
-                    {
-                        selection = Int32.Parse(Console.ReadLine());
-                        if(selection <= 0 || selection > 3)
-                        {
-                            throw new Exception();
-                        }
-                        break;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Please enter either 1, 2, or 3");
-                    }
-                }
-
-                //prompt for skill level
-                int skillLevel = 0;
-                while (true) 
-                {
-                    Console.Write("Skill Level (between 1 and 100): ");
-                    try
-                    {
-                        skillLevel = Int32.Parse(Console.ReadLine());
-                        if(skillLevel <= 0 || skillLevel > 100)
-                        {
-                            throw new Exception();
-                        }
-                        break;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Skill Level must be an integer between 1 and 100");
-                    }
-                }
-
-                //prompt for skill level
-                int cut = 0;
-                while (true) 
-                {
-                    Console.Write("Cut (between 1 and 100): ");
-                    try
-                    {
-                        cut = Int32.Parse(Console.ReadLine());
-                        if(cut <= 0 || cut > 100)
-                        {
-                            throw new Exception();
-                        }
-                        break;
-                    }
-                    catch
-                    {
-                        Console.WriteLine("Cut must be an integer between 1 and 100");
-                    }
-                }
-
-                // add appropiate typr of criminal with user's choices
-                switch (selection)
-                {
-                    case 1:
-                        rolodex.Add(new Hacker(name, skillLevel, cut));
-                        break;
-                     case 2:
-                        rolodex.Add(new Muscle(name, skillLevel, cut));
-                        break;
-                    case 3:
-                        rolodex.Add(new LockSpecialist(name, skillLevel, cut));
-                        break;    
-                }
-
-            }
+        if (name == "")
+        {
+          break;
         }
+
+        int selection = 0;
+        //prompt for a specialty
+        while (true)
+        {
+          Console.WriteLine("What is their specialty?\n1) Hacker\n2) Muscle\n3) Lock Specialist");
+          try
+          {
+            selection = Int32.Parse(Console.ReadLine());
+            if (selection <= 0 || selection > 3)
+            {
+              throw new Exception();
+            }
+            break;
+          }
+          catch
+          {
+            Console.WriteLine("Please enter either 1, 2, or 3");
+          }
+        }
+
+        //prompt for skill level
+        int skillLevel = 0;
+        while (true)
+        {
+          Console.Write("Skill Level (between 1 and 100): ");
+          try
+          {
+            skillLevel = Int32.Parse(Console.ReadLine());
+            if (skillLevel <= 0 || skillLevel > 100)
+            {
+              throw new Exception();
+            }
+            break;
+          }
+          catch
+          {
+            Console.WriteLine("Skill Level must be an integer between 1 and 100");
+          }
+        }
+
+        //prompt for skill level
+        int cut = 0;
+        while (true)
+        {
+          Console.Write("Cut (between 1 and 100): ");
+          try
+          {
+            cut = Int32.Parse(Console.ReadLine());
+            if (cut <= 0 || cut > 100)
+            {
+              throw new Exception();
+            }
+            break;
+          }
+          catch
+          {
+            Console.WriteLine("Cut must be an integer between 1 and 100");
+          }
+        }
+
+        // add appropiate typr of criminal with user's choices
+        switch (selection)
+        {
+          case 1:
+            rolodex.Add(new Hacker(name, skillLevel, cut));
+            break;
+          case 2:
+            rolodex.Add(new Muscle(name, skillLevel, cut));
+            break;
+          case 3:
+            rolodex.Add(new LockSpecialist(name, skillLevel, cut));
+            break;
+        }
+
+      }
+
+
     }
+  }
 }
