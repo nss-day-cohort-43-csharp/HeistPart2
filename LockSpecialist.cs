@@ -4,6 +4,18 @@ namespace TeamSixHeist
 {
     public class LockSpecialist : IRobber
     {
+        //empty constructor
+        public LockSpecialist()
+        {
+
+        }
+        //orverload for initialize
+         public LockSpecialist(string name, int skill, int cut)
+        {
+            Name = name;
+            SkillLevel = skill;
+            PercentageCut = cut;
+        }
         public string Name { get; set; }
         public int SkillLevel { get; set; }
         public int PercentageCut { get; set; }
