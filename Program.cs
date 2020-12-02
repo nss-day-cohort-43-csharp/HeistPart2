@@ -8,11 +8,25 @@ namespace TeamSixHeist
         static void Main(string[] args)
         {
             List<IRobber> rolodex = CreateRolodex();
-
-
+            DisplayRolodex(rolodex);
+            
             // create a new bank 
             Bank b = new Bank();
             b.Recon();
+        }
+
+        static void DisplayRolodex(List<IRobber> rolodex)
+        {
+            // Iterate list of robbers and display their stats
+            int indexValue = 1;
+            rolodex.ForEach(robber =>
+            {  
+                string specialty = robber.GetType().ToString().Split(".")[1];
+                
+                Console.WriteLine($"{indexValue}: {robber.Name}\nSpecialty: {specialty}\nSkill Level: {robber.SkillLevel}\nCut: {robber.PercentageCut}");
+                Console.WriteLine("");
+                ++indexValue;
+            });
         }
 
         static List<IRobber> CreateRolodex()
