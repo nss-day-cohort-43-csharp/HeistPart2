@@ -84,13 +84,16 @@ namespace TeamSixHeist
                         //make sure there is enough cut left
                         if (rolodex[indexOfSelection].PercentageCut > totalCutLeft)
                         {
-                            Console.WriteLine("That criminal is too greedy");
-                            throw new Exception();
+                            throw new GreedyCriminalException();
                         }
 
                         break;
                     }
-                    catch
+                    catch(GreedyCriminalException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    catch 
                     {
                         Console.WriteLine("Please enter a valid selection");
                     }
