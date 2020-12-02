@@ -123,20 +123,19 @@ namespace TeamSixHeist
                     }
                 }
 
-                //declare a type of instance based on the user's choice
-                // IRobber newCriminal;
-                // switch (selection)
-                // {
-                //     case 1:
-                //         newCriminal = new Hacker();
-                //         break;
-                //      case 2:
-                //         newCriminal = new Muscle();
-                //         break;
-                //     case 3:
-                //         newCriminal = new LockSpecialist();
-                //         break;    
-                // }
+                // add appropiate typr of criminal with user's choices
+                switch (selection)
+                {
+                    case 1:
+                        rolodex.Add(new Hacker(name, skillLevel, cut));
+                        break;
+                     case 2:
+                        rolodex.Add(new Muscle(name, skillLevel, cut));
+                        break;
+                    case 3:
+                        rolodex.Add(new LockSpecialist(name, skillLevel, cut));
+                        break;    
+                }
 
             }
         }

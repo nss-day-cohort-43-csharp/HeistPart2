@@ -4,6 +4,18 @@ namespace TeamSixHeist
 {
     public class Muscle : IRobber
     {
+        //empty constructor
+        public Muscle()
+        {
+
+        }
+        //overload to intitialize
+        public Muscle(string name, int skill, int cut)
+        {
+            Name = name;
+            SkillLevel = skill;
+            PercentageCut = cut;
+        }
         public string Name { get; set; }
         public int SkillLevel { get; set; }
         public int PercentageCut { get; set; }
