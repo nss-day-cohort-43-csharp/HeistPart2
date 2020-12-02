@@ -8,11 +8,88 @@ namespace TeamSixHeist
         static void Main(string[] args)
         {
             List<IRobber> rolodex = CreateRolodex();
-            DisplayRolodex(rolodex);
-            
+
+
             // create a new bank 
             Bank b = new Bank();
             b.Recon();
+
+            //display the rolodex
+            DisplayRolodex(rolodex);
+
+            //create the crew
+            List<IRobber> crew = CreateCrew(rolodex);
+
+        }
+
+        static List<IRobber> CreateCrew(List<IRobber> rolodex)
+        {
+            //declare the crew
+            List<IRobber> crew = new List<IRobber>();
+
+            //declare and initialize the total cut
+            int totalCutLeft = 100;
+
+            //prompt the user
+            while (rolodex.Count > 0)
+            {
+                //make sure selection is valid
+                int indexOfSelection = 0;
+                string selection = "dummy";
+                while (true)
+                {
+                    //prompt for selection
+                    Console.Write("Pick criminal for your crew: ");
+                    selection = Console.ReadLine();
+                    //if blank, exit
+                    if (selection == "")
+                    {
+                        break;
+                    }
+                    try
+                    {
+                        //try to parse
+                        indexOfSelection = Int32.Parse(selection) - 1;
+                        //make sure it is not out of bounds
+                        if (indexOfSelection < 0 || indexOfSelection >= rolodex.Count)
+                        {
+                            throw new Exception();
+                        }
+                        //make sure there is enough cut left
+                        if (rolodex[indexOfSelection].PercentageCut > totalCutLeft)
+                        {
+                            Console.WriteLine("That criminal is too greedy");
+                            throw new Exception();
+                        }
+
+                        break;
+                    }
+                    catch
+                    {
+                        Console.WriteLine("Please enter a valid selection");
+                    }
+                }
+
+                //if user enters nothing, exit
+                if (selection == "")
+                {
+                    break;
+                }
+
+                //grab the selected criminal
+                IRobber selectedCriminal = rolodex[indexOfSelection];
+
+                //decrement the totalCut by the selected criminals cut
+                totalCutLeft -= selectedCriminal.PercentageCut;
+
+                //add the criminal to the crew and remove it from the rolodex
+                crew.Add(selectedCriminal);
+                rolodex.RemoveAt(indexOfSelection);
+
+                //display the rolodex
+                DisplayRolodex(rolodex);
+            }
+            return crew;
         }
 
         static void DisplayRolodex(List<IRobber> rolodex)
@@ -20,9 +97,9 @@ namespace TeamSixHeist
             // Iterate list of robbers and display their stats
             int indexValue = 1;
             rolodex.ForEach(robber =>
-            {  
+            {
                 string specialty = robber.GetType().ToString().Split(".")[1];
-                
+
                 Console.WriteLine($"{indexValue}: {robber.Name}\nSpecialty: {specialty}\nSkill Level: {robber.SkillLevel}\nCut: {robber.PercentageCut}");
                 Console.WriteLine("");
                 ++indexValue;
